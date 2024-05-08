@@ -31,3 +31,7 @@ body {
     text-wrap: balance;
   }
 }
+.background{
+  background: rgb(8,4,4);
+  background: linear-gradient(180deg, rgba(8,4,4,1) 27%, rgba(19,19,19,1) 100%); 
+}
