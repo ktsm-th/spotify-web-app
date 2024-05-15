@@ -2,6 +2,7 @@ import { auth } from "../auth"
 
 export default async function ArtistTileProfile({ artist }) {
   const session = await auth()
+  console.log(artist.id)
   if (!session.user) return null
   return (
     <div className="flex flex-col justify-center align-center">

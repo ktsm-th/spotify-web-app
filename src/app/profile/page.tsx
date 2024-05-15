@@ -1,31 +1,12 @@
 import ArtistTileProfile from "@/components/artist-tile-profile";
 import { auth } from "../../auth"
+import { fetchFromSpotify } from "@/helpers";
 
 export default async function Profile() {
 
-  const session = await auth()
-  if (!session.user) return null
-  if (session && session.user) {
-    const response = await fetch(`https://api.spotify.com/v1/me/top/artists`, {
-      headers: {
-        "Authorization": `Bearer ${session.accessToken}`,
-      },
-    })
-
-    if (!response.ok) {
-      console.log(response);
-      // throw new Error('Failed to fetch');
-    }
-
-    const artistData = await response.json();
-
-    const userResponse = await fetch(`https://api.spotify.com/v1/me/`, {
-      headers: {
-        "Authorization": `Bearer ${session.accessToken}`,
-      },
-    })
-
-    const userData = await userResponse.json();
+    const session = await auth()
+    const artistData = await fetchFromSpotify('https://api.spotify.com/v1/me/top/artists')
+    const userData = await fetchFromSpotify('https://api.spotify.com/v1/me/')
 
     return (
       <main className="flex min-h-screen flex-col items-center justify-between p-24 background">
@@ -41,10 +22,11 @@ export default async function Profile() {
         <div className="mt-4 flex flex-wrap grid-cols-4 gap-4 justify-center max-w-5xl">
 
           {artistData.items.map(artist => (
-            <ArtistTileProfile artist={artist}/>
+            <ArtistTileProfile
+              artist={artist}
+            />
           ))}
         </div>
       </main>
     );
   }
-}
