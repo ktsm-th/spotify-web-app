@@ -17,11 +17,13 @@ const userData = await fetchFromSpotify('https://api.spotify.com/v1/me/')
 
       <aside id="default-sidebar" className="fixed top-0 right-0 z-40 w-48 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidenav">
         <div className="overflow-y-auto py-5 px-3 h-full bg-zinc-900/75 border-zinc-900 flex flex-col">
-          <div className="flex flex-col justify-center items-center">
+          {userData.display_name &&
+            <div className="flex flex-col justify-center items-center">
             <img src={userData.images[1].url} alt="User Avatar" className="rounded-full h-24 w-24" />
             <h3 className=" start font-bold text-lg mt-2">{userData.display_name}</h3>
             <h3 className=" start text-xs">{userData.followers.total} followers</h3>
           </div>
+          }
             <ul className="pt-5 mt-5 space-y-2 border-t border-zinc-800">
               <NavbarLink link="/profile" text="Profile"/>
               <NavbarLink link="/profile" text="Top Artists"/>

@@ -22,7 +22,7 @@ export default function Carousel({ albums }) {
         {albums.map((album, index) => (
           <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>
             <img className="p-2" src={album.images[0].url} alt={album.name} style={{ maxWidth: '100%', height: 'auto' }} />
-            <p className="px-2 truncate text-sm">{album.name}</p>
+            <p className="px-2 truncate text-sm font-semibold">{album.name}</p>
             <p className="px-2 text-sm">{album.release_date.substr(0,4)} | {album.album_type}</p>
           </div>
         ))}
